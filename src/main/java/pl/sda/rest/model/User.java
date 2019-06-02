@@ -85,6 +85,10 @@ public void addRole (Role role){
 
 @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
 private List<Post> posts = new ArrayList<>();
+
+
+
+    public void addPost(Post post){
+        this.posts.add(post);
+    }
 }
-
-

@@ -5,6 +5,5 @@ import pl.sda.rest.model.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    // SELECT * FROM role
 
 }
