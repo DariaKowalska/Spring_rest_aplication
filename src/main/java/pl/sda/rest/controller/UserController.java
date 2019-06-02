@@ -39,7 +39,7 @@ public class UserController {
     public String login(String login, String password) {
         User loggedUser = userService.loginUser(login, password);
         if (loggedUser != null) {
-            if (loggedUser.getActive() == true) {
+            if (loggedUser.getActive()) {
                 return "zalogowano";
             }
             return "konto jest nieaktywne";
@@ -47,4 +47,10 @@ public class UserController {
 
         return "błąd logowania";
     }
+
+@PutMapping("/addAdmin/{id}")
+public void addAdmin(@PathVariable Long id){
+    userService.addAmin(id);
 }
+}
+

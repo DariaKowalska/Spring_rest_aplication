@@ -2,6 +2,7 @@ package pl.sda.rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.sda.rest.model.Role;
 import pl.sda.rest.model.User;
 import pl.sda.rest.repository.RoleRepository;
 import pl.sda.rest.repository.UserRepository;
@@ -12,6 +13,7 @@ public class UserService {
 
     UserRepository userRepository;
     RoleRepository roleRepository;
+
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -20,7 +22,7 @@ public class UserService {
 
     public void saveUser(String login, String password) {
         User user = new User(login, password);
-// odwołanie do rekordu
+        // odwołanie do rekordu
         user.addRole(roleRepository.getOne(2L));
 
         //zapis do bazy danych
@@ -35,5 +37,12 @@ public class UserService {
 
     public User loginUser(String login, String password) {
         return userRepository.findFirstByLoginAndPassword(login, password);
+    }
+
+
+    public void addAmin(Long id) {
+        User user = userRepository.getOne(id);
+        user.addRole(roleRepository.getOne(1l));
+        userRepository.save(user);
     }
 }

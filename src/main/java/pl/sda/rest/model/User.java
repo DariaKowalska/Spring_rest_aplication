@@ -4,7 +4,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -80,6 +82,9 @@ public User (){}
 public void addRole (Role role){
     this.roles.add(role);
 }
+
+@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+private List<Post> posts = new ArrayList<>();
 }
 
 
