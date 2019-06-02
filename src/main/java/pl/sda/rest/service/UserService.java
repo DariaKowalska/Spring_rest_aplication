@@ -20,7 +20,11 @@ public class UserService {
         //zapis do bazy danych
         userRepository.save(user);
     }
-
+public void confirmedUser(String login){
+   User confirmedUser = userRepository.findFirstByLogin(login);
+   confirmedUser.setActive(true);
+   userRepository.save(confirmedUser);
+}
     public User loginUser(String login, String password){
     return userRepository.findFirstByLoginAndPassword(login,password);
     }

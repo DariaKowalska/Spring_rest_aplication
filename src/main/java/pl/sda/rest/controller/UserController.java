@@ -2,7 +2,9 @@ package pl.sda.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import pl.sda.rest.model.User;
 import pl.sda.rest.service.UserService;
 
@@ -24,8 +26,11 @@ public class UserController {
     }
 
     //potwierdzenie
-    
-
+                                //zmienna ścieżki URL
+    @PutMapping("/confirmation/{login}")  //zmienna pobrana z URL
+public void confirmation(@PathVariable String login){
+        userService.confirmedUser(login);
+    }
 
 
     //logowanie
