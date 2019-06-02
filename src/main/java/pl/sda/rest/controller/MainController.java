@@ -14,29 +14,33 @@ import java.util.List;
 @RestController
 public class MainController {
 
-    private List<String> logins = new ArrayList<>(Arrays.asList("xx","kk","pp","ll"));
-private User user;
+    private List<String> logins = new ArrayList<>(Arrays.asList("xx", "kk", "pp", "ll"));
+    private User user;
 
     @GetMapping("/")
-    public String hello () {
+    public String hello() {
         return "Hello World";
     }
+
     @GetMapping("/logins")
-public List<String> getLogins(){
-        return  logins;
+    public List<String> getLogins() {
+        return logins;
     }
+
     @PostMapping("/addUser")
-    public User addUser(String login, String password){
-        user = new User(login, password, LocalDateTime.now(), false);
+    public User addUser(String login, String password) {
+        user = new User(login, password);
         return user;
     }
+
     @PutMapping("/confirmRegistration")
-    public User confirmRegistration(){
-       user.setActive(true);
+    public User confirmRegistration() {
+        user.setActive(true);
         return user;
     }
+
     @GetMapping("/getUser")
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 

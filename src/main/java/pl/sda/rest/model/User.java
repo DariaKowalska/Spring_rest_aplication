@@ -1,25 +1,36 @@
 package pl.sda.rest.model;
+
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+
 public class User {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-   private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String login;
     private String password;
     private LocalDateTime registration_date = LocalDateTime.now();
     private boolean active = false;
 
-    public User(String login, String password, LocalDateTime registration_date, Boolean active) {
+    public User(String login, String password) {
         this.login = login;
         this.password = password;
-        this.registration_date = registration_date;
-        this.active = active;
+    }
+public User (){}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -54,12 +65,15 @@ public class User {
         this.active = active;
     }
 
-    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-@JoinTable(
-        name = "user_role",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-)
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
 
     private Set<Role> roles = new HashSet<>();
 
