@@ -77,6 +77,9 @@ public User (){}
 
     private Set<Role> roles = new HashSet<>();
 
+public void addRole (Role role){
+    this.roles.add(role);
+}
 }
 
 

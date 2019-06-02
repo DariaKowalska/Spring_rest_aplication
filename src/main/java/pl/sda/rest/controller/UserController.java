@@ -12,36 +12,39 @@ public class UserController {
 
     //pole do wstrzyknięcia
     UserService userService;
+
     //wstrzyknięcie zależnosci przez konstruktor
     @Autowired
-    public UserController(UserService userService){
-        this.userService=userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     //rejestracja
 
     @PostMapping("/registration")
-    public void registration(String login, String password){
+    public void registration(String login, String password) {
         userService.saveUser(login, password);
     }
 
     //potwierdzenie
-                                //zmienna ścieżki URL
+    //zmienna ścieżki URL
     @PutMapping("/confirmation/{login}")  //zmienna pobrana z URL
-public void confirmation(@PathVariable String login){
+    public void confirmation(@PathVariable String login) {
         userService.confirmedUser(login);
     }
 
 
     //logowanie
-@GetMapping ("/login")
-    public String login (String login, String password){
-        if(userService.loginUser(login,password)!=null) {
-            return "zalogowano";
+    @GetMapping("/login")
+    public String login(String login, String password) {
+        User loggedUser = userService.loginUser(login, password);
+        if (loggedUser != null) {
+            if (loggedUser.getActive() == true) {
+                return "zalogowano";
+            }
+            return "konto jest nieaktywne";
         }
-        // zablokowane konto
 
-
-    return "błąd logowania";
-}
+        return "błąd logowania";
+    }
 }

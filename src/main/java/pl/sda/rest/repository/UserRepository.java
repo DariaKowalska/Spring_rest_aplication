@@ -12,8 +12,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 // SELECT * FROM user WHERE login = ? and password=?;
     User findFirstByLoginAndPassword(String login, String password);
 // SELECT * FROM user WHERE login = ?
-
     User findFirstByLogin(String login);
+
 
 }
 
