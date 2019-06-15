@@ -7,6 +7,8 @@ import pl.sda.rest.model.enums.CategoryEnum;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -22,7 +24,7 @@ public class Post {
     private String Title;
     private String content;
     private CategoryEnum category;
-    private LocalDateTime added_date= LocalDateTime.now();
+    private LocalDateTime added_date = LocalDateTime.now();
 
     public Post(String title, String content, CategoryEnum category) {
         Title = title;
@@ -78,12 +80,19 @@ public class Post {
         this.user = user;
     }
 
-    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-@JoinColumn(name = "user_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "post")
+    private List<Comment> comments = new ArrayList<>();
 
-// todo relacja między postem a komentarzem
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
+
+
 }
+
 
 

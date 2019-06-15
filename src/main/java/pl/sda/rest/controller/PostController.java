@@ -30,6 +30,12 @@ public class PostController {
         public List<Post> getAllPosts(){
             return postService.getAllPosts();
         }
+
+    @PostMapping("/addComment/{post_id}")
+public void addComment(String message, String author, @PathVariable Long post_id){
+    postService.addComment(message, author, post_id);
+    }  
+
     }
 
 
